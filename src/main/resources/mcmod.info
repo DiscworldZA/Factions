@@ -1,0 +1,15 @@
+[
+{
+  "modid": "factions",
+  "name": "Factions",
+  "description": "An AI enabled faction mod. Aims to improve Vanilla villages",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["DiscworldZA"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
