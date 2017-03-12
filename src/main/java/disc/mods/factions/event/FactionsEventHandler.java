@@ -4,28 +4,23 @@ import disc.mods.core.utils.PlayerUtils;
 import disc.mods.factions.ai.faction.FactionHandler;
 import disc.mods.factions.block.BlockBuildable;
 import disc.mods.factions.block.BlockFaction;
+import disc.mods.factions.capabilities.IFactionCapability;
 import disc.mods.factions.entity.EntityLivingAI;
-import disc.mods.factions.ref.Names;
-import disc.mods.factions.ref.Names.NBT;
 import disc.mods.factions.tileentity.TileEntityBuilding;
+import disc.mods.factions.utils.CapabilityHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 public class FactionsEventHandler
 {
-    public static void init()
-    {
-        MinecraftForge.EVENT_BUS.register(new FactionsEventHandler());
-    }
-
     @SubscribeEvent
-    public void Entity_EnterWorld(EntityJoinWorldEvent event)
+    public void NotifyAiLoaded(EntityJoinWorldEvent event)
     {
         if (event.getWorld().isRemote)
             return;
@@ -37,28 +32,41 @@ public class FactionsEventHandler
     }
 
     @SubscribeEvent
+    public void Player_Login(PlayerLoggedInEvent event)
+    {
+        IFactionCapability cap = CapabilityHelper.getFactionCapability(event.player);
+        if (cap.hasFaction())
+        {
+            cap.sync(event.player);
+        }
+    }
+
+    @SubscribeEvent
     public void BlockRightClicked(PlayerInteractEvent.RightClickBlock event)
     {
-        if (event.getItemStack().getItem() instanceof ItemBlock)
+        if (event.getEntity() instanceof EntityPlayer)
         {
-            ItemBlock itemBlock = (ItemBlock) event.getItemStack().getItem();
-
-            if (itemBlock.getBlock() instanceof BlockFaction)
+            if (event.getItemStack().getItem() instanceof ItemBlock)
             {
-                if (PlayerUtils.hasPresistedData(event.getEntityPlayer(), NBT.FactionName))
+                ItemBlock itemBlock = (ItemBlock) event.getItemStack().getItem();
+                IFactionCapability cap = CapabilityHelper.getFactionCapability(event.getEntityPlayer());
+                if (itemBlock.getBlock() instanceof BlockFaction)
                 {
-                    if (event.getWorld().isRemote)
-                        PlayerUtils.sendMessage(event.getEntityPlayer(), "Already in a faction!");
-                    event.setCanceled(true);
+                    if (cap.hasFaction())
+                    {
+                        event.setCanceled(true);
+                        if (event.getWorld().isRemote)
+                            PlayerUtils.sendMessage(event.getEntityPlayer(), "Already in Faction!");
+                    }
                 }
-            }
-            else if (itemBlock.getBlock() instanceof BlockBuildable)
-            {
-                if (!PlayerUtils.hasPresistedData(event.getEntityPlayer(), NBT.FactionName))
+                else if (itemBlock.getBlock() instanceof BlockBuildable)
                 {
-                    if (event.getWorld().isRemote)
-                        PlayerUtils.sendMessage(event.getEntityPlayer(), "Not in a faction!");
-                    event.setCanceled(true);
+                    if (!cap.hasFaction())
+                    {
+                        event.setCanceled(true);
+                        if (event.getWorld().isRemote)
+                            PlayerUtils.sendMessage(event.getEntityPlayer(), "No Faction!");
+                    }
                 }
             }
         }
@@ -71,10 +79,11 @@ public class FactionsEventHandler
 
         if (tile instanceof TileEntityBuilding)
         {
-            if (PlayerUtils.hasPresistedData(event.getPlayer(), NBT.FactionName))
+            IFactionCapability cap = CapabilityHelper.getFactionCapability(event.getPlayer());
+            if (cap.hasFaction())
             {
                 TileEntityBuilding tileFaction = (TileEntityBuilding) tile;
-                tileFaction.getFactionBuilding().faction = FactionHandler.getFaction(PlayerUtils.getPresistedData(event.getPlayer(), NBT.FactionName));
+                tileFaction.getFactionBuilding().faction = FactionHandler.getFaction(cap.getFactionName());
             }
         }
     }

@@ -6,6 +6,7 @@ import disc.mods.factions.ref.Names;
 import disc.mods.factions.ref.Names.NBT;
 import disc.mods.factions.tileentity.TileEntityBuilding;
 import disc.mods.factions.tileentity.TileEntityFaction;
+import disc.mods.factions.utils.CapabilityHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,22 +25,17 @@ public class BlockFaction extends BlockBuildable
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
-    {
-        return new TileEntityFaction();
-    }
-
-    @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         if (placer instanceof EntityPlayer)
         {
+            EntityPlayer player = (EntityPlayer) placer;
             TileEntity tile = world.getTileEntity(pos);
             if (tile instanceof TileEntityFaction)
             {
                 TileEntityFaction tileFaction = (TileEntityFaction) tile;
                 tileFaction.faction = FactionHandler.newFaction(tileFaction, "Test Faction");
-                PlayerUtils.setPresistedData((EntityPlayer) placer, NBT.FactionName, "Test Faction");
+                CapabilityHelper.getFactionCapability(player).setFactionName("Test Faction").sync(player);
             }
         }
     }
@@ -57,5 +53,11 @@ public class BlockFaction extends BlockBuildable
             }
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state)
+    {
+        return new TileEntityFaction();
     }
 }

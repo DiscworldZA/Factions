@@ -1,6 +1,7 @@
 package disc.mods.factions.block;
 
 import disc.mods.factions.tileentity.TileEntityBlacksmith;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -12,7 +13,7 @@ public class BlockBlacksmith extends BlockBuildable
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public TileEntity createTileEntity(World world, IBlockState state)
     {
         return new TileEntityBlacksmith();
     }

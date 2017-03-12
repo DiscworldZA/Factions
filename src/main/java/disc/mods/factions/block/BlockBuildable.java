@@ -2,17 +2,12 @@ package disc.mods.factions.block;
 
 import disc.mods.core.block.CoreTileEntityBlock;
 import disc.mods.core.utils.PlayerUtils;
-import disc.mods.factions.ai.faction.FactionHandler;
+import disc.mods.factions.Factions;
 import disc.mods.factions.creativetab.Tabs;
-import disc.mods.factions.init.FactionsTileEntities;
-import disc.mods.factions.ref.Names;
-import disc.mods.factions.tileentity.FactionsTileEntity;
 import disc.mods.factions.tileentity.TileEntityBuilding;
-import disc.mods.factions.tileentity.TileEntityFaction;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -25,8 +20,6 @@ public abstract class BlockBuildable extends CoreTileEntityBlock
     {
         super(Name);
         this.setCreativeTab(Tabs.Factions);
-        this.setHardness(0.5f);
-        this.setHarvestLevel("pickaxe", 1);
     }
 
     @Override
@@ -56,9 +49,11 @@ public abstract class BlockBuildable extends CoreTileEntityBlock
     @Override
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
-        
-        
-        
         super.onBlockDestroyedByPlayer(worldIn, pos, state);
+    }
+    
+    public void registerItemModel(ItemBlock itemBlock)
+    {
+        Factions.proxy.registerItemRenderer(itemBlock, 0);
     }
 }

@@ -15,7 +15,7 @@ public class FactionsItem extends CoreItem
 
     public void registerItemModel()
     {
-        Factions.proxy.registerItemRenderer(this, 0, name);
+        Factions.proxy.registerItemRenderer(this, 0);
     }
     
 }

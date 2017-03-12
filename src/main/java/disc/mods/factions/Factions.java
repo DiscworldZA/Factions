@@ -3,10 +3,13 @@ package disc.mods.factions;
 import disc.mods.factions.ai.crafting.FactionsCraftingHandler;
 import disc.mods.factions.config.ConfigLoader;
 import disc.mods.factions.config.FactionsConfig;
-import disc.mods.factions.event.FactionsEventHandler;
 import disc.mods.factions.init.FactionsBlocks;
+import disc.mods.factions.init.FactionsCapabilities;
 import disc.mods.factions.init.FactionsEntities;
+import disc.mods.factions.init.FactionsEventHandlers;
 import disc.mods.factions.init.FactionsItems;
+import disc.mods.factions.init.FactionsPackets;
+import disc.mods.factions.network.FactionsPacketHandler;
 import disc.mods.factions.proxy.CommonProxy;
 import disc.mods.factions.ref.References;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +26,11 @@ public class Factions
     @Instance
     public static Factions instance;
 
+    public static Factions getInstance()
+    {
+        return instance;
+    }
+
     // Proxy
     @SidedProxy(serverSide = References.Proxy.Common, clientSide = References.Proxy.Client)
     public static CommonProxy proxy;
@@ -30,17 +38,31 @@ public class Factions
     // Config
     public FactionsConfig config;
 
+    private static FactionsPacketHandler network;
+
+    public static FactionsPacketHandler getNetwork()
+    {
+        return network != null ? network : (network = new FactionsPacketHandler());
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        // Proxy preInit
         proxy.preInit(event);
+
+        // Config Load
         config = ConfigLoader.LoadConfig(event);
         config.preInit(event);
+
+        // Initialization
         FactionsBlocks.init();
         FactionsItems.init();
         FactionsEntities.init();
+        FactionsCapabilities.init();
+        FactionsEventHandlers.init();
+        FactionsPackets.init();
         FactionsCraftingHandler.registerCrafters();
-        FactionsEventHandler.init();
     }
 
     @EventHandler
