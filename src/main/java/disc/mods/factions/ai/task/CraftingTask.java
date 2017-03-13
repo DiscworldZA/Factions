@@ -2,9 +2,9 @@ package disc.mods.factions.ai.task;
 
 import java.util.List;
 
-import disc.mods.factions.ai.actions.GetItemAction;
-import disc.mods.factions.ai.actions.PutItemAction;
-import disc.mods.factions.ai.actions.TravelAction;
+import disc.mods.factions.ai.action.GetItemAction;
+import disc.mods.factions.ai.action.PutItemAction;
+import disc.mods.factions.ai.action.TravelAction;
 import disc.mods.factions.entity.EntityLivingAI;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

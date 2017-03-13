@@ -1,6 +1,6 @@
 package disc.mods.factions.ai.task;
 
-import disc.mods.factions.ai.actions.FactionTaskActions;
+import disc.mods.factions.ai.action.FactionTaskActions;
 import disc.mods.factions.entity.EntityLivingAI;
 
 public abstract class AITask

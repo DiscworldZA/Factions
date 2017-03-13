@@ -1,7 +1,7 @@
 package disc.mods.factions.block;
 
 import disc.mods.core.utils.PlayerUtils;
-import disc.mods.factions.ai.faction.FactionHandler;
+import disc.mods.factions.faction.FactionHandler;
 import disc.mods.factions.ref.Names;
 import disc.mods.factions.ref.Names.NBT;
 import disc.mods.factions.tileentity.TileEntityBuilding;

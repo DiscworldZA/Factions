@@ -1,11 +1,11 @@
 package disc.mods.factions.event;
 
 import disc.mods.core.utils.PlayerUtils;
-import disc.mods.factions.ai.faction.FactionHandler;
 import disc.mods.factions.block.BlockBuildable;
 import disc.mods.factions.block.BlockFaction;
 import disc.mods.factions.capabilities.IFactionCapability;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.faction.FactionHandler;
 import disc.mods.factions.tileentity.TileEntityBuilding;
 import disc.mods.factions.utils.CapabilityHelper;
 import net.minecraft.entity.player.EntityPlayer;

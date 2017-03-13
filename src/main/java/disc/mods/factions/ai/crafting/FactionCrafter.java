@@ -9,8 +9,9 @@ import disc.mods.core.utils.FileIOHelper;
 import disc.mods.factions.ai.crafting.recipes.JsonRecipe;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.References;
+import disc.mods.factions.registry.IRegistryProperty;
 
-public class FactionCrafter
+public class FactionCrafter implements IRegistryProperty
 {
     private File jsonFile;
 
@@ -18,7 +19,7 @@ public class FactionCrafter
 
     public FactionCrafter(Class<? extends EntityLivingAI> entityClass)
     {
-        jsonFile = new File("config/" + References.Mod.Id + "/crafters/" + entityClass.getSimpleName() + ".json");
+        jsonFile = new File("config/" + References.Mod.Id + "/crafters/" + entityClass.getSimpleName().replace("Entity", "") + ".json");
         if (!jsonFile.exists())
         {
             FileIOHelper.CreateFile(jsonFile);
@@ -33,10 +34,15 @@ public class FactionCrafter
         if (!json.isEmpty())
         {
             List<JsonRecipe> jsonRecipes = JsonRecipe.fromListJson(json);
-            for(JsonRecipe recipe : jsonRecipes)
+            for (JsonRecipe recipe : jsonRecipes)
             {
                 recipes.put(recipe.result, recipe);
             }
         }
+    }
+
+    public boolean hasResult(String Id)
+    {
+        return recipes.containsKey(Id);
     }
 }

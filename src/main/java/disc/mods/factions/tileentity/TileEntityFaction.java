@@ -1,8 +1,8 @@
 package disc.mods.factions.tileentity;
 
-import disc.mods.factions.ai.faction.Faction;
-import disc.mods.factions.ai.faction.FactionHandler;
-import disc.mods.factions.ai.faction.buildings.FactionBuilding;
+import disc.mods.factions.faction.Faction;
+import disc.mods.factions.faction.FactionHandler;
+import disc.mods.factions.faction.buildings.FactionBuilding;
 import disc.mods.factions.ref.Names;
 import net.minecraft.nbt.NBTTagCompound;
 

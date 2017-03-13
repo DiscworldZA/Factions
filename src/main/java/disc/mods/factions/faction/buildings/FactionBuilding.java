@@ -1,15 +1,16 @@
-package disc.mods.factions.ai.faction.buildings;
+package disc.mods.factions.faction.buildings;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import disc.mods.core.utils.WorldHelper;
-import disc.mods.factions.ai.faction.Faction;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.faction.Faction;
+import disc.mods.factions.registry.IRegisterable;
+import disc.mods.factions.registry.IRegistryProperty;
 import disc.mods.factions.tileentity.TileEntityBuilding;
-import net.minecraft.entity.EntityLiving;
 
-public abstract class FactionBuilding
+public abstract class FactionBuilding implements IRegisterable
 {
     public Faction faction;
     protected TileEntityBuilding tile;

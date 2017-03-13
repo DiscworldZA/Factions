@@ -2,9 +2,10 @@ package disc.mods.factions.entity;
 
 import disc.mods.factions.ai.FactionAI;
 import disc.mods.factions.ai.InventoryAI;
-import disc.mods.factions.ai.faction.buildings.FactionBuilding;
 import disc.mods.factions.ai.task.FactionAITasks;
+import disc.mods.factions.faction.buildings.FactionBuilding;
 import disc.mods.factions.ref.Names;
+import disc.mods.factions.registry.IRegisterable;
 import disc.mods.factions.tileentity.TileEntityBuilding;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class EntityLivingAI extends EntityLiving
+public abstract class EntityLivingAI extends EntityLiving implements IRegisterable
 {
     public BlockPos buildingBlockPos;
     public FactionAITasks factionTasks;
@@ -22,7 +23,7 @@ public abstract class EntityLivingAI extends EntityLiving
     {
         super(worldIn);
         factionTasks = new FactionAITasks();
-        createInventory();
+        inventory = new InventoryAI(this, getInventorySize());
     }
 
     @Override
@@ -39,7 +40,7 @@ public abstract class EntityLivingAI extends EntityLiving
 
     public abstract ResourceLocation getTexture();
 
-    public abstract void createInventory();
+    public abstract int getInventorySize();
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)

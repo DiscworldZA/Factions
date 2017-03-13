@@ -12,13 +12,17 @@ public class Names
         public static final String Faction = "faction";
         public static final String House = "house";
         public static final String Blacksmith = "blacksmith";
+        public static final String Lumberjack = "lumberjack";
+        public static final String PostOffice = "postoffice";
     }
 
     public static class Entities
     {
         public static final String Human = "human";
         public static final String Builder = "builder";
+        public static final String Blacksmith = "blacksmith";
         public static final String DeliveryMan = "deliveryman";
+        public static final String Lumberjack = "lumberjack";
     }
 
     public static class NBT
@@ -39,5 +43,7 @@ public class Names
         public static final String Faction = "tile.faction.name";
         public static final String House = "tile.house.name";
         public static final String Blacksmith = "tile.blacksmith.name";
+        public static final String Lumberjack = "tile.lumberjack.name";
+        public static final String PostOffice = "tile.postoffice.name";
     }
 }

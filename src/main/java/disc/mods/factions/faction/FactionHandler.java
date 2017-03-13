@@ -1,4 +1,4 @@
-package disc.mods.factions.ai.faction;
+package disc.mods.factions.faction;
 
 import java.util.HashMap;
 import java.util.Map;

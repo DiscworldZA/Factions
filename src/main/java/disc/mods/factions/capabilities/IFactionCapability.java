@@ -1,6 +1,6 @@
 package disc.mods.factions.capabilities;
 
-import disc.mods.factions.ai.faction.Faction;
+import disc.mods.factions.faction.Faction;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;

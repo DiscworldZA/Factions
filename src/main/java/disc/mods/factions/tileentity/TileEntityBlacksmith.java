@@ -1,6 +1,6 @@
 package disc.mods.factions.tileentity;
 
-import disc.mods.factions.ai.faction.buildings.BuildingBlacksmith;
+import disc.mods.factions.faction.buildings.BuildingBlacksmith;
 
 public class TileEntityBlacksmith extends TileEntityBuilding
 {

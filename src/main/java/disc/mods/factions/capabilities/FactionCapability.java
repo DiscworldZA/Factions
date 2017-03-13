@@ -1,8 +1,8 @@
 package disc.mods.factions.capabilities;
 
 import disc.mods.factions.Factions;
-import disc.mods.factions.ai.faction.Faction;
-import disc.mods.factions.ai.faction.FactionHandler;
+import disc.mods.factions.faction.Faction;
+import disc.mods.factions.faction.FactionHandler;
 import disc.mods.factions.integration.jei.FactionsJEI;
 import disc.mods.factions.network.packet.FactionCapabilityPacket;
 import disc.mods.factions.ref.Names.NBT;
@@ -42,7 +42,10 @@ public class FactionCapability implements IFactionCapability
     @Override
     public IFactionCapability sync(EntityPlayer player)
     {
-        Factions.getInstance().getNetwork().SendToEntity(new FactionCapabilityPacket(factionName), (EntityPlayerMP) player);
+        if (player instanceof EntityPlayerMP)
+        {
+            Factions.getInstance().getNetwork().SendToEntity(new FactionCapabilityPacket(factionName), (EntityPlayerMP) player);
+        }
         return this;
     }
 

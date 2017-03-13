@@ -1,6 +1,6 @@
 package disc.mods.factions.ai;
 
-import disc.mods.factions.ai.actions.AIAction;
+import disc.mods.factions.ai.action.AIAction;
 import disc.mods.factions.ai.task.AITask;
 import disc.mods.factions.entity.EntityLivingAI;
 import net.minecraft.entity.ai.EntityAIBase;

@@ -3,7 +3,7 @@ package disc.mods.factions.entity;
 import disc.mods.core.ref.Values;
 import disc.mods.core.utils.ResourceLocationHelper;
 import disc.mods.factions.ai.InventoryAI;
-import disc.mods.factions.ai.actions.FollowAction;
+import disc.mods.factions.ai.action.FollowAction;
 import disc.mods.factions.ref.FactionsSettings;
 import disc.mods.factions.ref.References;
 import net.minecraft.util.ResourceLocation;
@@ -23,9 +23,9 @@ public class EntityHuman extends EntityHumanoidAI
     }
 
     @Override
-    public void createInventory()
+    public int getInventorySize()
     {
-        inventory = new InventoryAI(this, 1);
+        return 1;
     }
 
 }

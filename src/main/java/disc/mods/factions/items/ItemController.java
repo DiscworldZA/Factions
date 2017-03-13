@@ -1,14 +1,13 @@
 package disc.mods.factions.items;
 
-import disc.mods.factions.ai.actions.GetItemAction;
-import disc.mods.factions.ai.actions.PutItemAction;
+import disc.mods.core.utils.PlayerUtils;
+import disc.mods.factions.entity.EntityBlacksmith;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.faction.buildings.JsonBuilding;
 import disc.mods.factions.ref.Names;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +18,8 @@ import net.minecraft.world.World;
 public class ItemController extends FactionsItem
 {
     private EntityLivingAI entity;
+    private BlockPos start;
+    private BlockPos end;
 
     public ItemController()
     {
@@ -40,10 +41,7 @@ public class ItemController extends FactionsItem
     {
         if (!worldIn.isRemote)
         {
-            if (entity != null)
-            {
-                
-            }
+            
         }
         return EnumActionResult.FAIL;
     }

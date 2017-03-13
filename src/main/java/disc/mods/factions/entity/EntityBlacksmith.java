@@ -6,10 +6,10 @@ import disc.mods.factions.ref.References;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityBuilder extends EntityHumanoidAI
+public class EntityBlacksmith extends EntityHumanoidAI
 {
 
-    public EntityBuilder(World worldIn)
+    public EntityBlacksmith(World worldIn)
     {
         super(worldIn);
     }
@@ -17,13 +17,13 @@ public class EntityBuilder extends EntityHumanoidAI
     @Override
     public ResourceLocation getTexture()
     {
-        return new ResourceLocationHelper().getEntityLocation(References.Mod.Id, "builder.png");
+        return new ResourceLocationHelper().getEntityLocation(References.Mod.Id, "blacksmith.png");
     }
 
     @Override
-    public void createInventory()
+    public int getInventorySize()
     {
-        inventory = new InventoryAI(this, 36);
+        return 36;
     }
 
 }

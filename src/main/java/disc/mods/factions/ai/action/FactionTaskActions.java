@@ -1,4 +1,4 @@
-package disc.mods.factions.ai.actions;
+package disc.mods.factions.ai.action;
 
 import java.util.Set;
 

@@ -2,7 +2,7 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "minecraft:blocks/iron_block"
+            "all": "minecraft:blocks/log_oak_top"
         },
         "model": "cube_all",
         "uvlock": true

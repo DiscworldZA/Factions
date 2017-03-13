@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-import disc.mods.factions.ai.actions.AIAction;
+import disc.mods.factions.ai.action.AIAction;
 
 public class FactionAITasks
 {

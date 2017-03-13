@@ -4,10 +4,11 @@ import java.util.Random;
 
 import disc.mods.core.utils.ResourceLocationHelper;
 import disc.mods.factions.Factions;
-import disc.mods.factions.entity.EntityBuilder;
+import disc.mods.factions.entity.EntityBlacksmith;
 import disc.mods.factions.entity.EntityDeliveryMan;
 import disc.mods.factions.entity.EntityHuman;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.entity.EntityLumberjack;
 import disc.mods.factions.ref.Names;
 import disc.mods.factions.ref.References;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -29,7 +30,8 @@ public class FactionsEntities
     public static void init()
     {
         RegisterEntityAI(EntityHuman.class, Names.Entities.Human);
-        RegisterEntityAI(EntityBuilder.class, Names.Entities.Builder);
+        RegisterEntityAI(EntityBlacksmith.class, Names.Entities.Builder);
         RegisterEntityAI(EntityDeliveryMan.class, Names.Entities.DeliveryMan);
+        RegisterEntityAI(EntityLumberjack.class, Names.Entities.Lumberjack);
     }
 }

@@ -1,4 +1,4 @@
-package disc.mods.factions.ai.actions;
+package disc.mods.factions.ai.action;
 
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.utils.InventoryHelper;
@@ -10,31 +10,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
-public class GetItemAction extends AIAction
+public class PutItemAction extends AIAction
 {
-    private BlockPos fromInventory;
-    private ItemStack stackToGet;
-    private boolean done;
+    private BlockPos toInventory;
+    private ItemStack stackToPut;
+    private boolean done = false;
 
-    private int tick;
+    private int tick = 0;
 
-    public GetItemAction(EntityLivingAI entity, BlockPos pos, ItemStack item)
+    public PutItemAction(EntityLivingAI entity, BlockPos pos, ItemStack item)
     {
         super(entity);
-        fromInventory = pos;
-        stackToGet = item;
+        toInventory = pos;
+        stackToPut = item;
     }
 
     @Override
     public boolean shouldExecute()
     {
-        return NavigationHelper.IsEntityCloseTo(handler, fromInventory);
+        return NavigationHelper.IsEntityCloseTo(handler, toInventory);
     }
 
     @Override
     public void startExecuting()
     {
-        TileEntity tile = handler.getEntityWorld().getTileEntity(fromInventory);
+        TileEntity tile = handler.getEntityWorld().getTileEntity(toInventory);
         if (tile instanceof IInventory)
         {
             IInventory inventory = (IInventory) tile;
@@ -52,24 +52,24 @@ public class GetItemAction extends AIAction
     public void updateAction()
     {
         tick++;
-        NavigationHelper.MakeEntityLookAt(handler, fromInventory);
+        NavigationHelper.MakeEntityLookAt(handler, toInventory);
         if (tick == 20 && !done)
         {
-            TileEntity tile = handler.getEntityWorld().getTileEntity(fromInventory);
+            TileEntity tile = handler.getEntityWorld().getTileEntity(toInventory);
             if (tile instanceof IInventory)
             {
                 IInventory inventory = (IInventory) tile;
-                for (int i = 0; i < inventory.getSizeInventory(); i++)
+                for (int i = 0; i < handler.inventory.getSizeInventory(); i++)
                 {
-                    ItemStack stackInv = inventory.getStackInSlot(i);
-                    if (stackInv.isItemEqual(stackToGet))
+                    ItemStack stackInv = handler.inventory.getStackInSlot(i);
+                    if (stackInv.isItemEqual(stackToPut))
                     {
-                        if (stackToGet.getCount() > stackInv.getCount())
+                        if (stackToPut.getCount() > stackInv.getCount())
                         {
-                            stackToGet.setCount(stackToGet.getCount() - stackInv.getCount());
-                            InventoryHelper.addToInventory(handler.inventory, stackInv);
-                            inventory.removeStackFromSlot(i);
-                            if (stackToGet.getCount() == 0)
+                            stackToPut.setCount(stackToPut.getCount() - stackInv.getCount());
+                            InventoryHelper.addToInventory(inventory, stackInv);
+                            handler.inventory.removeStackFromSlot(i);
+                            if (stackToPut.getCount() == 0)
                             {
                                 done = true;
                                 break;
@@ -77,8 +77,8 @@ public class GetItemAction extends AIAction
                         }
                         else
                         {
-                            inventory.decrStackSize(i, stackToGet.getCount());
-                            InventoryHelper.addToInventory(handler.inventory, stackToGet);
+                            handler.inventory.decrStackSize(i, stackToPut.getCount());
+                            InventoryHelper.addToInventory(inventory, stackToPut);
                             done = true;
                         }
                     }
@@ -91,7 +91,7 @@ public class GetItemAction extends AIAction
     @Override
     public void resetAction()
     {
-        TileEntity tile = handler.getEntityWorld().getTileEntity(fromInventory);
+        TileEntity tile = handler.getEntityWorld().getTileEntity(toInventory);
         if (tile instanceof IInventory)
         {
             IInventory inventory = (IInventory) tile;

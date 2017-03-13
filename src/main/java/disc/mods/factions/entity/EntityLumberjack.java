@@ -1,14 +1,14 @@
 package disc.mods.factions.entity;
 
-import disc.mods.core.utils.ResourceLocationHelper;
-import disc.mods.factions.ai.InventoryAI;
 import disc.mods.factions.ref.References;
+import disc.mods.core.utils.ResourceLocationHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityDeliveryMan extends EntityHumanoidAI
+public class EntityLumberjack extends EntityLivingAI
 {
-    public EntityDeliveryMan(World worldIn)
+
+    public EntityLumberjack(World worldIn)
     {
         super(worldIn);
     }
@@ -16,7 +16,7 @@ public class EntityDeliveryMan extends EntityHumanoidAI
     @Override
     public ResourceLocation getTexture()
     {
-        return ResourceLocationHelper.getEntityLocation(References.Mod.Id, "deliveryman.png");
+        return ResourceLocationHelper.getEntityLocation(References.Mod.Id, "lumberjack.png");
     }
 
     @Override

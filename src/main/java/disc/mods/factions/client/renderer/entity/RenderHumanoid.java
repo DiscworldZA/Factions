@@ -1,7 +1,7 @@
 package disc.mods.factions.client.renderer.entity;
 
 import disc.mods.core.utils.ResourceLocationHelper;
-import disc.mods.factions.entity.EntityBuilder;
+import disc.mods.factions.entity.EntityBlacksmith;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.References;
 import net.minecraft.client.model.ModelPlayer;
