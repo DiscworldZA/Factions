@@ -30,3 +30,4 @@ run
 
 config/*
 logs/*
+!gradle.properties
