@@ -1,10 +1,5 @@
 package disc.mods.factions.ai.crafting.recipes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -13,7 +8,16 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-import disc.mods.factions.registry.IRegisterable;
+import disc.mods.factions.ai.InventoryAI;
+import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.inventory.EmptyContainer;
+import net.minecraft.inventory.ContainerWorkbench;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class JsonRecipe
 {
@@ -21,6 +25,7 @@ public class JsonRecipe
     public int count;
     public String[][] recipe;
     public int recipeSize;
+    ItemStack oredictStack = ItemStack.EMPTY;
 
     public JsonRecipe(int size)
     {
@@ -31,6 +36,54 @@ public class JsonRecipe
     public boolean hasResult()
     {
         return result != "";
+    }
+
+    public NonNullList<ItemStack> getResult()
+    {
+        NonNullList<ItemStack> list = NonNullList.<ItemStack> create();
+        list.add(new ItemStack(Item.getByNameOrId(result), count));
+        return list;
+    }
+
+    public NonNullList<ItemStack> getIngredients(InventoryAI inventory)
+    {
+        NonNullList<ItemStack> ingredients = NonNullList.<ItemStack> create();
+        for (int x = 0; x < recipe.length; x++)
+        {
+            for (int y = 0; y < recipe[x].length; y++)
+            {
+                if(recipe[x][y] == null) continue;
+                if (inventory == null)
+                {
+                    oredictStack = OreDictionary.getOres(recipe[x][y]).get(0);
+                }
+                else
+                {
+                    oredictStack = inventory.oreDictMatch(OreDictionary.getOres(recipe[x][y]));
+                }
+                if (oredictStack.isEmpty())
+                {
+                    if(OreDictionary.getOres(recipe[x][y]).size() > 0)
+                    {
+                        oredictStack = OreDictionary.getOres(recipe[x][y]).get(0);
+                    }
+                    else
+                    {
+                        oredictStack = new ItemStack(Item.getByNameOrId(recipe[x][y]));
+                    }
+                }
+                if (ingredients.stream().anyMatch(stack -> stack.isItemEqual(oredictStack)))
+                {
+                    ItemStack stackInList = ingredients.stream().filter(stack -> stack.isItemEqual(oredictStack)).findFirst().get();
+                    stackInList.setCount(stackInList.getCount() + oredictStack.getCount());
+                }
+                else
+                {
+                    ingredients.add(oredictStack);
+                }
+            }
+        }
+        return ingredients;
     }
 
     public String toJson()
@@ -55,38 +108,22 @@ public class JsonRecipe
         return gson.toJson(obj);
     }
 
-    public static List<JsonRecipe> fromListJson(String Json)
+    public boolean isValid()
     {
-        List<JsonRecipe> recipes = new ArrayList<JsonRecipe>();
-        Gson gson = new GsonBuilder().create();
-        JsonObject objArray = gson.fromJson(Json, JsonObject.class);
-        Iterator<Entry<String, JsonElement>> it = objArray.entrySet().iterator();
-        while (it.hasNext())
+        InventoryCrafting craftMatrix = new InventoryCrafting(new EmptyContainer(), recipeSize, recipeSize);
+        int index = -1;
+        for (int x = 0; x < recipeSize; x++)
         {
-            recipes.add(JsonRecipe.fromJsonEntry(it.next()));
-        }
-        return recipes;
-    }
-
-    public static JsonRecipe fromJsonEntry(Entry<String, JsonElement> entry)
-    {
-        JsonObject obj = entry.getValue().getAsJsonObject();
-        if (obj.has("recipe"))
-        {
-            JsonArray recipeArr = obj.get("recipe").getAsJsonArray();
-            JsonRecipe recipe = new JsonRecipe(recipeArr.size() * 3);
-            recipe.count = obj.get("count").getAsInt();
-            recipe.result = entry.getKey();
-            for (int x = 0; x < recipeArr.size(); x++)
+            for (int y = 0; y < recipeSize; y++)
             {
-                JsonArray sArray = recipeArr.get(x).getAsJsonArray();
-                for (int y = 0; y < sArray.size(); y++)
-                {
-                    recipe.recipe[x][y] = sArray.get(y) instanceof JsonNull ? null : sArray.get(y).getAsString();
-                }
+                index++;
+                if (recipe[x][y] == null)
+                    continue;
+                craftMatrix.setInventorySlotContents(index, OreDictionary.getOres(recipe[x][y]).get(0));
             }
-            return recipe;
         }
-        return new JsonRecipe(0);
+        ItemStack resultCraft = CraftingManager.getInstance().findMatchingRecipe(craftMatrix, null);
+        ItemStack result = new ItemStack(Item.getByNameOrId(this.result));
+        return resultCraft.isItemEqual(result);
     }
 }

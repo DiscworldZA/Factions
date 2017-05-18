@@ -1,8 +1,8 @@
 package disc.mods.factions.ai;
 
+import disc.mods.core.utils.InventoryHelper;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.Names;
-import disc.mods.factions.utils.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IInventory;
@@ -16,23 +16,23 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventoryAI implements IInventory
 {
-    protected EntityLivingAI aiEntity;
+    protected EntityLivingAI entity;
     protected NonNullList<ItemStack> inventory;
 
     private boolean inventoryChanged;
 
     public InventoryAI(EntityLivingAI entity, int size)
     {
-        aiEntity = entity;
+        this.entity = entity;
         inventory = NonNullList.<ItemStack> withSize(size, ItemStack.EMPTY);
     }
 
     public void setHeldItem(EntityEquipmentSlot slot, ItemStack item)
     {
-        ItemStack stackInSlot = aiEntity.getItemStackFromSlot(slot);
+        ItemStack stackInSlot = entity.getItemStackFromSlot(slot);
         if (!stackInSlot.isEmpty())
         {
-            InventoryHelper.addToInventory(this, stackInSlot);
+            InventoryHelper.Add(this, stackInSlot);
             clearHeldItem(slot);
         }
 
@@ -40,8 +40,8 @@ public class InventoryAI implements IInventory
         {
             if (itemStack.isItemEqual(item))
             {
-                aiEntity.setItemStackToSlot(slot, item);
-                removeFromInventory(itemStack);
+                entity.setItemStackToSlot(slot, item);
+                remove(itemStack);
                 break;
             }
         }
@@ -49,18 +49,47 @@ public class InventoryAI implements IInventory
 
     public void clearHeldItem(EntityEquipmentSlot slot)
     {
-        aiEntity.setItemStackToSlot(slot, ItemStack.EMPTY);
+        entity.setItemStackToSlot(slot, ItemStack.EMPTY);
     }
 
-    public void removeFromInventory(ItemStack itemStack)
+    public void add(ItemStack stack)
     {
-        inventory.remove(itemStack);
+        InventoryHelper.Add(this, stack);
+    }
+
+    public void remove(ItemStack itemStack)
+    {
+        InventoryHelper.Remove(this, itemStack);
+    }
+
+    public boolean hasItem(ItemStack stack)
+    {
+        for (int i = 0; i < this.getSizeInventory(); i++)
+        {
+            if (getStackInSlot(i).isItemEqual(stack))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ItemStack oreDictMatch(NonNullList<ItemStack> itemStacks)
+    {
+        for (ItemStack stack : itemStacks)
+        {
+            if (hasItem(stack))
+            {
+                return stack;
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
     public String getName()
     {
-        return Names.Inventory.AI + "." + aiEntity.getName();
+        return Names.Inventory.AI + "." + entity.getName();
     }
 
     @Override

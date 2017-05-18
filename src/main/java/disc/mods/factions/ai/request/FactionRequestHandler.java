@@ -23,7 +23,7 @@ public class FactionRequestHandler
     {
         for (EntityLivingAI ai : faction.getAIs())
         {
-            if (Registries.CrafterRegistry.get(ai).hasResult(Id))
+            if (Registries.CrafterRegistry.get(ai).hasRecipe(Id))
             {
                 return ai;
             }
@@ -35,7 +35,10 @@ public class FactionRequestHandler
     {
         EntityLivingAI ai = findCrafterFor(Id);
         if (ai == null)
+        {
             System.out.println("Unable to find crafter");
+            return;
+        }
         JsonBuilding building = Registries.BuildingRegistry.get(ai.getFactionBuilding());
         BlockPos craftingBench = building.getFunctionalBlockPos(FunctionalBlock.Crafting, faction.factionTile.getPos());
         BlockPos storage = building.getFunctionalBlockPos(FunctionalBlock.Storage, faction.factionTile.getPos());

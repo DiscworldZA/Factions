@@ -49,7 +49,7 @@ public class JsonRecipeExportHandler implements IRecipeTransferHandler
         {
             if (!inputs.get(i).isInput())
             {
-                recipe.result = OreDictHelper.getOreDictEquivalent(inputs.get(i).getAllIngredients());
+                recipe.result = inputs.get(i).getAllIngredients().get(0).getItem().getRegistryName().toString();
                 recipe.count = inputs.get(i).getAllIngredients().get(0).getCount();
             }
         }

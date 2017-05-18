@@ -31,6 +31,7 @@ public class FactionAI extends EntityAIBase
         if (handler.isServerWorld())
         {
             currentTask = handler.factionTasks.getFirstTask();
+            currentTask.startExecuting();
         }
     }
 
@@ -39,7 +40,10 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            currentTask.updateTask();
+            if(!currentTask.updateTask())
+            {
+                //Handle Parrallel Tasking
+            }
         }
     }
 
@@ -48,7 +52,7 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            
+            return currentTask.continueExecuting();
         }
         return false;
     }

@@ -6,11 +6,9 @@ import java.util.List;
 import disc.mods.core.utils.WorldHelper;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.faction.Faction;
-import disc.mods.factions.registry.IRegisterable;
-import disc.mods.factions.registry.IRegistryProperty;
 import disc.mods.factions.tileentity.TileEntityBuilding;
 
-public abstract class FactionBuilding implements IRegisterable
+public abstract class FactionBuilding
 {
     public Faction faction;
     protected TileEntityBuilding tile;

@@ -12,12 +12,10 @@ import com.google.gson.JsonObject;
 
 import disc.mods.core.utils.FileIOHelper;
 import disc.mods.factions.ref.References;
-import disc.mods.factions.registry.IRegisterable;
-import disc.mods.factions.registry.IRegistryProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
-public class JsonBuilding implements IRegistryProperty
+public class JsonBuilding
 {
     public enum FunctionalBlock
     {

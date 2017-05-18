@@ -7,11 +7,11 @@ import java.util.Map;
 
 import disc.mods.core.utils.FileIOHelper;
 import disc.mods.factions.ai.crafting.recipes.JsonRecipe;
+import disc.mods.factions.ai.crafting.recipes.JsonRecipeFactory;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.References;
-import disc.mods.factions.registry.IRegistryProperty;
 
-public class FactionCrafter implements IRegistryProperty
+public class FactionCrafter
 {
     private File jsonFile;
 
@@ -33,7 +33,7 @@ public class FactionCrafter implements IRegistryProperty
         String json = FileIOHelper.ReadFile(jsonFile);
         if (!json.isEmpty())
         {
-            List<JsonRecipe> jsonRecipes = JsonRecipe.fromListJson(json);
+            List<JsonRecipe> jsonRecipes = JsonRecipeFactory.fromListJson(json);
             for (JsonRecipe recipe : jsonRecipes)
             {
                 recipes.put(recipe.result, recipe);
@@ -41,8 +41,13 @@ public class FactionCrafter implements IRegistryProperty
         }
     }
 
-    public boolean hasResult(String Id)
+    public boolean hasRecipe(String Id)
     {
         return recipes.containsKey(Id);
+    }
+    
+    public JsonRecipe getRecipe(String Id)
+    {
+        return recipes.get(Id);
     }
 }

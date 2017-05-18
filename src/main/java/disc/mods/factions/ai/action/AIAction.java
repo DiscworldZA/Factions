@@ -18,7 +18,7 @@ public abstract class AIAction
 
     }
 
-    public abstract void updateAction();
+    public abstract boolean updateAction();
 
     public boolean continueExecuting()
     {
@@ -27,6 +27,6 @@ public abstract class AIAction
 
     public void resetAction()
     {
-
+        
     }
 }

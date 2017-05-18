@@ -34,7 +34,7 @@ public class FollowAction extends AIAction
     }
 
     @Override
-    public void updateAction()
+    public boolean updateAction()
     {
         if (player != null)
         {
@@ -49,6 +49,7 @@ public class FollowAction extends AIAction
                 NavigationHelper.NavigateEntityTo(handler, player.getPosition());
             }
         }
+        return true;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class TravelAction extends AIAction
     }
 
     @Override
-    public void updateAction()
+    public boolean updateAction()
     {
         if (isTraveling())
         {
@@ -38,6 +38,7 @@ public class TravelAction extends AIAction
                 handler.getNavigator().clearPathEntity();
             }
         }
+        return true;
     }
 
     @Override

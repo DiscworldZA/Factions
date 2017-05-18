@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Registry<T extends IRegisterable, O extends IRegistryProperty> implements IRegistry<T, O>
+public class Registry<T, O> implements IRegistry<T, O>
 {
     private Map<Class<? extends T>, O> registry = new HashMap<Class<? extends T>, O>();
 

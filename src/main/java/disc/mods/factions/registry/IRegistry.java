@@ -1,6 +1,6 @@
 package disc.mods.factions.registry;
 
-public interface IRegistry<T extends IRegisterable, O extends IRegistryProperty>
+public interface IRegistry<T, O>
 {
     void Register(Class<? extends T> registerClass, Class<? extends O> container);
 

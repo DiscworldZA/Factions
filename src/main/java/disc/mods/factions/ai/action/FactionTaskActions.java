@@ -1,18 +1,23 @@
 package disc.mods.factions.ai.action;
 
-import java.util.Set;
+import java.util.Iterator;
 
-import com.google.common.collect.Sets;
-
-import disc.mods.factions.ai.task.AITask;
+import net.minecraft.util.NonNullList;
 
 public class FactionTaskActions
 {
-    public final Set<AIAction> actions = Sets.<AIAction> newLinkedHashSet();
+    public final NonNullList<AIAction> actions = NonNullList.<AIAction> create();
+    public AIAction currentAction;
+    private Iterator<AIAction> actionIt;
 
     public void addAction(AIAction action)
     {
         actions.add(action);
+    }
+
+    public AIAction get(int index)
+    {
+        return actions.get(index);
     }
 
     public boolean hasActions()
@@ -24,10 +29,21 @@ public class FactionTaskActions
     {
         if (hasActions())
         {
-            for (AIAction action : actions)
-            {
-                return action;
-            }
+            return (actionIt = actions.iterator()).next();
+        }
+        return null;
+    }
+
+    public boolean hasNextAction()
+    {
+        return actionIt.hasNext();
+    }
+
+    public AIAction getNextAction()
+    {
+        if (actionIt.hasNext())
+        {
+            return actionIt.next();
         }
         return null;
     }
@@ -35,5 +51,13 @@ public class FactionTaskActions
     public void removeAction(AIAction action)
     {
         actions.remove(action);
+    }
+
+    public void resetActions()
+    {
+        for (AIAction action : actions)
+        {
+            action.resetAction();
+        }
     }
 }

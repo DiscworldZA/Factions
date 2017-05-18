@@ -40,15 +40,6 @@ public abstract class BlockBuildable extends CoreTileEntityBlock
             if (tile instanceof TileEntityBuilding)
             {
                 TileEntityBuilding building = (TileEntityBuilding) tile;
-                building.getFactionBuilding().spawnTestEntity();
-            }
-        }
-        if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
-        {
-            TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile instanceof TileEntityBuilding)
-            {
-                TileEntityBuilding building = (TileEntityBuilding) tile;
                 PlayerUtils.sendMessage(playerIn, building.getFactionBuilding().faction.Name);
             }
         }
@@ -59,7 +50,6 @@ public abstract class BlockBuildable extends CoreTileEntityBlock
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         super.onBlockPlacedBy(world, pos, state, placer, stack);
-
         if (placer instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer) placer;
@@ -71,7 +61,7 @@ public abstract class BlockBuildable extends CoreTileEntityBlock
                 {
                     TileEntityBuilding building = (TileEntityBuilding) tile;
                     cap.getFaction().buildings.add(building.getFactionBuilding());
-
+                    if(!world.isRemote) building.getFactionBuilding().spawnTestEntity();
                     JsonBuilding jsonB = Registries.BuildingRegistry.get(building.getFactionBuilding());
 
                     BlockPos craftingBench = jsonB.getFunctionalBlockPos(FunctionalBlock.Crafting, building.getPos());

@@ -5,10 +5,11 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import disc.mods.factions.ai.action.AIAction;
+import net.minecraft.util.NonNullList;
 
 public class FactionAITasks
 {
-    public final Set<AITask> tasks = Sets.<AITask> newLinkedHashSet();
+    public final NonNullList<AITask> tasks = NonNullList.<AITask> create();
 
     public void addTask(AITask task)
     {
