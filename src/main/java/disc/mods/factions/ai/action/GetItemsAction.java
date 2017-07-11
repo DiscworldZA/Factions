@@ -1,7 +1,7 @@
 package disc.mods.factions.ai.action;
 
-import disc.mods.core.utils.InventoryHelper;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.utils.InventoryHelper;
 import disc.mods.factions.utils.NavigationHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

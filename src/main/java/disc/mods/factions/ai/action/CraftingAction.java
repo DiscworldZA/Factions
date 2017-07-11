@@ -33,7 +33,7 @@ public class CraftingAction extends AIAction
         {
             handler.inventory.remove(stack);
         }
-        handler.inventory.add(recipe.getResult());
+        handler.inventory.addToInventory(recipe.getResult());
     }
 
     @Override

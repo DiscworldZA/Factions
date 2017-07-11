@@ -49,7 +49,7 @@ public class GetItemAction extends AIAction
     }
 
     @Override
-    public void updateAction()
+    public boolean updateAction()
     {
         tick++;
         NavigationHelper.MakeEntityLookAt(handler, fromInventory);
@@ -67,7 +67,7 @@ public class GetItemAction extends AIAction
                         if (stackToGet.getCount() > stackInv.getCount())
                         {
                             stackToGet.setCount(stackToGet.getCount() - stackInv.getCount());
-                            InventoryHelper.addToInventory(handler.inventory, stackInv);
+                            InventoryHelper.Add(handler.inventory, stackInv);
                             inventory.removeStackFromSlot(i);
                             if (stackToGet.getCount() == 0)
                             {
@@ -78,7 +78,7 @@ public class GetItemAction extends AIAction
                         else
                         {
                             inventory.decrStackSize(i, stackToGet.getCount());
-                            InventoryHelper.addToInventory(handler.inventory, stackToGet);
+                            InventoryHelper.Add(handler.inventory, stackToGet);
                             done = true;
                         }
                     }
@@ -86,6 +86,7 @@ public class GetItemAction extends AIAction
             }
             tick = 0;
         }
+        return done;
     }
 
     @Override

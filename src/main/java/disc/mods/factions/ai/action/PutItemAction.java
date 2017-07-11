@@ -49,7 +49,7 @@ public class PutItemAction extends AIAction
     }
 
     @Override
-    public void updateAction()
+    public boolean updateAction()
     {
         tick++;
         NavigationHelper.MakeEntityLookAt(handler, toInventory);
@@ -67,7 +67,7 @@ public class PutItemAction extends AIAction
                         if (stackToPut.getCount() > stackInv.getCount())
                         {
                             stackToPut.setCount(stackToPut.getCount() - stackInv.getCount());
-                            InventoryHelper.addToInventory(inventory, stackInv);
+                            InventoryHelper.Add(inventory, stackInv);
                             handler.inventory.removeStackFromSlot(i);
                             if (stackToPut.getCount() == 0)
                             {
@@ -78,7 +78,7 @@ public class PutItemAction extends AIAction
                         else
                         {
                             handler.inventory.decrStackSize(i, stackToPut.getCount());
-                            InventoryHelper.addToInventory(inventory, stackToPut);
+                            InventoryHelper.Add(inventory, stackToPut);
                             done = true;
                         }
                     }
@@ -86,6 +86,7 @@ public class PutItemAction extends AIAction
             }
             tick = 0;
         }
+        return done;
     }
 
     @Override

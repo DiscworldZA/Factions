@@ -1,8 +1,8 @@
 package disc.mods.factions.ai;
 
-import disc.mods.core.utils.InventoryHelper;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.Names;
+import disc.mods.factions.utils.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IInventory;
@@ -52,9 +52,17 @@ public class InventoryAI implements IInventory
         entity.setItemStackToSlot(slot, ItemStack.EMPTY);
     }
 
-    public void add(ItemStack stack)
+    public void addToInventory(ItemStack stack)
     {
         InventoryHelper.Add(this, stack);
+    }
+    
+    public void addToInventory(NonNullList<ItemStack> stacks)
+    {
+    	for(int i = 0; i < stacks.size(); i++)
+    	{
+    		addToInventory(stacks.get(0));
+    	}
     }
 
     public void remove(ItemStack itemStack)

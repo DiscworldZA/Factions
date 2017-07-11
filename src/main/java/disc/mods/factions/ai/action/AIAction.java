@@ -27,6 +27,6 @@ public abstract class AIAction
 
     public void resetAction()
     {
-        
+
     }
 }

@@ -1,5 +1,6 @@
 package disc.mods.factions.utils;
 
+import disc.mods.factions.ai.InventoryAI;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -7,7 +8,7 @@ import net.minecraft.util.NonNullList;
 public class InventoryHelper
 {
 
-    public static ItemStack addToInventory(IInventory inventory, ItemStack itemStack)
+    public static ItemStack Add(IInventory inventory, ItemStack itemStack)
     {
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
@@ -33,6 +34,10 @@ public class InventoryHelper
                 }
             }
         }
-        return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
-    }
+		return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
+	}
+
+	public static void Remove(InventoryAI inventoryAI, ItemStack itemStack) {
+
+	}
 }
