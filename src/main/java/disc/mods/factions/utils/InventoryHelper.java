@@ -8,14 +8,14 @@ import net.minecraft.util.NonNullList;
 public class InventoryHelper
 {
 
-    public static ItemStack Add(IInventory inventory, ItemStack itemStack)
+    public static ItemStack Add(IInventory inventoryAI, ItemStack itemStack)
     {
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        for (int i = 0; i < inventoryAI.getSizeInventory(); i++)
         {
-            ItemStack stackInInv = inventory.getStackInSlot(i);
+            ItemStack stackInInv = inventoryAI.getStackInSlot(i);
             if (stackInInv.isEmpty())
             {
-                inventory.setInventorySlotContents(i, itemStack);
+                inventoryAI.setInventorySlotContents(i, itemStack);
                 break;
             }
             else if (stackInInv.isItemEqual(itemStack))
@@ -34,10 +34,32 @@ public class InventoryHelper
                 }
             }
         }
-		return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
-	}
+        return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
+    }
 
-	public static void Remove(InventoryAI inventoryAI, ItemStack itemStack) {
-
-	}
+    public static ItemStack Remove(InventoryAI inventoryAI, ItemStack itemStack)
+    {
+        for (int i = 0; i < inventoryAI.getSizeInventory(); i++)
+        {
+            ItemStack stackInInv = inventoryAI.getStackInSlot(i);
+            if (stackInInv.isEmpty())
+                continue;
+            else if (stackInInv.isItemEqual(itemStack))
+            {
+                if (stackInInv.getCount() - itemStack.getCount() < 0)
+                {
+                    itemStack.setCount(itemStack.getCount() - stackInInv.getCount());
+                    stackInInv.setCount(0);
+                    continue;
+                }
+                else
+                {
+                    itemStack.setCount(0);
+                    stackInInv.setCount(stackInInv.getCount() - itemStack.getCount());
+                    break;
+                }
+            }
+        }
+        return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
+    }
 }
