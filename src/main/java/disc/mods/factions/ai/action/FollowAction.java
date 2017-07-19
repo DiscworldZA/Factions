@@ -1,5 +1,6 @@
 package disc.mods.factions.ai.action;
 
+import disc.mods.factions.ai.task.AITask;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.FactionsSettings;
 import disc.mods.factions.utils.NavigationHelper;
@@ -9,16 +10,12 @@ public class FollowAction extends AIAction
 {
     private EntityPlayer player;
 
-    public FollowAction(EntityLivingAI entity)
-    {
-        super(entity);
-    }
-
     private double followDistance = 6.25D;
 
-    public void setPlayer(EntityPlayer player)
+    public FollowAction setPlayer(EntityPlayer player)
     {
         this.player = player;
+        return this;
     }
 
     @Override

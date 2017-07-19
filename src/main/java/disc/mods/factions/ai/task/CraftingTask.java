@@ -20,9 +20,9 @@ public class CraftingTask extends AITask
     public CraftingTask(EntityLivingAI entity, ItemStack itemStack, BlockPos bench, BlockPos chest)
     {
         super(entity);
-        this.craftingBench = bench;
+        craftingBench = bench;
         this.chest = chest;
-        this.stackToCraft = itemStack;
+        stackToCraft = itemStack;
         recipe = Registries.CrafterRegistry.get(entity).getRecipe(itemStack.getItem().getRegistryName().toString());
         queueActions();
     }
@@ -30,12 +30,12 @@ public class CraftingTask extends AITask
     @Override
     public void queueActions()
     {
-        this.taskActions.addAction(new TravelAction(handler, chest));
-        this.taskActions.addAction(new GetItemsAction(handler, chest, recipe.getIngredients(handler.inventory)));
-        this.taskActions.addAction(new TravelAction(handler, craftingBench));
-        this.taskActions.addAction(new CraftingAction(handler, stackToCraft));
-        this.taskActions.addAction(new TravelAction(handler, chest));
-        this.taskActions.addAction(new PutItemsAction(handler, chest, recipe.getResult()));
+        taskActions.addAction(new TravelAction(chest));
+        taskActions.addAction(new GetItemsAction(chest, recipe.getIngredients(handler.inventory)));
+        taskActions.addAction(new TravelAction(craftingBench));
+        taskActions.addAction(new CraftingAction(stackToCraft));
+        taskActions.addAction(new TravelAction(chest));
+        taskActions.addAction(new PutItemsAction(chest, recipe.getResult()));
     }
 
     @Override

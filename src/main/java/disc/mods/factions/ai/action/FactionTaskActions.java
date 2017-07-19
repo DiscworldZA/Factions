@@ -2,6 +2,7 @@ package disc.mods.factions.ai.action;
 
 import java.util.Iterator;
 
+import disc.mods.factions.entity.EntityLivingAI;
 import net.minecraft.util.NonNullList;
 
 public class FactionTaskActions
@@ -10,9 +11,16 @@ public class FactionTaskActions
     public AIAction currentAction;
     private Iterator<AIAction> actionIt;
 
+    protected EntityLivingAI handler;
+
+    public FactionTaskActions(EntityLivingAI entity)
+    {
+        handler = entity;
+    }
+
     public void addAction(AIAction action)
     {
-        actions.add(action);
+        actions.add(action.setHandler(handler));
     }
 
     public AIAction get(int index)

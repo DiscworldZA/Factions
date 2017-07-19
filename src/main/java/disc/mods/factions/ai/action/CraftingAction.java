@@ -11,9 +11,8 @@ public class CraftingAction extends AIAction
     private ItemStack craft;
     private String craftName;
 
-    public CraftingAction(EntityLivingAI entity, ItemStack stackToCraft)
+    public CraftingAction(ItemStack stackToCraft)
     {
-        super(entity);
         craft = stackToCraft;
         craftName = stackToCraft.getItem().getRegistryName().toString();
     }

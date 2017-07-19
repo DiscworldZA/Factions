@@ -7,9 +7,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class TravelAction extends AIAction
 {
-    public TravelAction(EntityLivingAI entity, BlockPos pos)
+    public TravelAction(BlockPos pos)
     {
-        super(entity);
         destination = pos;
     }
 

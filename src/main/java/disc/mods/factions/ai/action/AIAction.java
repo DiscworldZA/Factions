@@ -6,11 +6,6 @@ public abstract class AIAction
 {
     protected EntityLivingAI handler;
 
-    public AIAction(EntityLivingAI entity)
-    {
-        handler = entity;
-    }
-
     public abstract boolean shouldExecute();
 
     public void startExecuting()
@@ -28,5 +23,11 @@ public abstract class AIAction
     public void resetAction()
     {
 
+    }
+    
+    public AIAction setHandler(EntityLivingAI entityLivingAI)
+    {
+        handler = entityLivingAI;
+        return this;
     }
 }

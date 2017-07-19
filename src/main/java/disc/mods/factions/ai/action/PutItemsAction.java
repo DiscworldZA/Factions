@@ -19,9 +19,8 @@ public class PutItemsAction extends AIAction
 
     private int tick = 0;
 
-    public PutItemsAction(EntityLivingAI entity, BlockPos pos, NonNullList<ItemStack> item)
+    public PutItemsAction(BlockPos pos, NonNullList<ItemStack> item)
     {
-        super(entity);
         toInventory = pos;
         stacksToPut = item;
     }

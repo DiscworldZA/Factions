@@ -7,11 +7,12 @@ import disc.mods.factions.entity.EntityLivingAI;
 public abstract class AITask
 {
     protected EntityLivingAI handler;
-    public final FactionTaskActions taskActions = new FactionTaskActions();
+    public final FactionTaskActions taskActions;
 
     public AITask(EntityLivingAI entity)
     {
         handler = entity;
+        taskActions = new FactionTaskActions(entity);
     }
 
     public abstract boolean shouldExecute();

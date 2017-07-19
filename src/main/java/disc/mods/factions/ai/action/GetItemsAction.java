@@ -19,9 +19,8 @@ public class GetItemsAction extends AIAction
 
     private int tick;
 
-    public GetItemsAction(EntityLivingAI entity, BlockPos pos, NonNullList<ItemStack> item)
+    public GetItemsAction(BlockPos pos, NonNullList<ItemStack> item)
     {
-        super(entity);
         fromInventory = pos;
         stacksToGet = item;
     }
