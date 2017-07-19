@@ -1,6 +1,7 @@
 package disc.mods.factions.items;
 
 import disc.mods.factions.ai.task.CraftingTask;
+import disc.mods.factions.ai.task.FollowTask;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.faction.buildings.JsonBuilding;
 import disc.mods.factions.faction.buildings.JsonBuilding.FunctionalBlock;
@@ -45,16 +46,7 @@ public class ItemController extends FactionsItem
         {
             if (entity != null)
             {
-                TileEntity tile = worldIn.getTileEntity(pos);
-                if (tile != null && tile instanceof TileEntityBlacksmith)
-                {
-                    TileEntityBuilding building = (TileEntityBuilding) tile;
-                    JsonBuilding jbuilding = Registries.BuildingRegistry.get(building.getFactionBuilding());
-                    BlockPos craftPos = jbuilding.getFunctionalBlockPos(FunctionalBlock.Crafting, pos);
-                    BlockPos chestPos = jbuilding.getFunctionalBlockPos(FunctionalBlock.Storage, pos);
-                    entity.factionTasks.addTask(new CraftingTask(entity, new ItemStack(Items.DIAMOND_PICKAXE), craftPos, chestPos));
-                    return EnumActionResult.SUCCESS;
-                }
+                entity.factionTasks.addTask(new FollowTask(entity, player));
             }
         }
         return EnumActionResult.FAIL;
