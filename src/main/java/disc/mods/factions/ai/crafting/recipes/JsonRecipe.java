@@ -8,9 +8,9 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-import disc.mods.factions.ai.InventoryAI;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.inventory.EmptyContainer;
+import disc.mods.factions.inventory.InventoryAI;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;

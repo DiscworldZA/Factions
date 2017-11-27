@@ -1,9 +1,10 @@
 package disc.mods.factions.entity;
 
-import disc.mods.factions.ai.FactionAI;
-import disc.mods.factions.ai.InventoryAI;
+import disc.mods.factions.ai.hooks.FactionAIHook;
+import disc.mods.factions.ai.queue.IQueueHandler;
 import disc.mods.factions.ai.task.FactionAITasks;
 import disc.mods.factions.faction.buildings.FactionBuilding;
+import disc.mods.factions.inventory.InventoryAI;
 import disc.mods.factions.ref.Names;
 import disc.mods.factions.tileentity.TileEntityBuilding;
 import net.minecraft.entity.EntityLiving;
@@ -12,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class EntityLivingAI extends EntityLiving
+public abstract class EntityLivingAI extends EntityLiving implements IQueueHandler
 {
     public BlockPos buildingBlockPos;
     public FactionAITasks factionTasks;
@@ -21,7 +22,7 @@ public abstract class EntityLivingAI extends EntityLiving
     public EntityLivingAI(World worldIn)
     {
         super(worldIn);
-        factionTasks = new FactionAITasks();
+        factionTasks = new FactionAITasks(this);
         inventory = new InventoryAI(this, getInventorySize());
     }
 
@@ -29,7 +30,7 @@ public abstract class EntityLivingAI extends EntityLiving
     protected void initEntityAI()
     {
         super.initEntityAI();
-        tasks.addTask(1, new FactionAI(this));
+        tasks.addTask(1, new FactionAIHook(this));
     }
 
     public double getMovementSpeed()
@@ -69,5 +70,11 @@ public abstract class EntityLivingAI extends EntityLiving
     public FactionBuilding getFactionBuilding()
     {
         return ((TileEntityBuilding) world.getTileEntity(buildingBlockPos)).getFactionBuilding();
+    }
+
+    @Override
+    public IQueueHandler getHandler()
+    {
+        return this;
     }
 }

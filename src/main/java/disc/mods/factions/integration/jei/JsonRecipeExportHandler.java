@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import disc.mods.core.utils.FileIOHelper;
-import disc.mods.core.utils.OreDictHelper;
-import disc.mods.core.utils.PlayerUtils;
+import disc.mods.core.util.FileIOHelper;
+import disc.mods.core.util.OreDictHelper;
+import disc.mods.core.util.PlayerUtils;
 import disc.mods.factions.ai.crafting.recipes.JsonRecipe;
 import disc.mods.factions.ref.References;
 import mezz.jei.api.gui.IGuiIngredient;

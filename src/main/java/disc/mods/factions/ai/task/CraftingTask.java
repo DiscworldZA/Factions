@@ -19,27 +19,31 @@ public class CraftingTask extends AITask
 
     public CraftingTask(EntityLivingAI entity, ItemStack itemStack, BlockPos bench, BlockPos chest)
     {
-        super(entity);
         craftingBench = bench;
         this.chest = chest;
         stackToCraft = itemStack;
         recipe = Registries.CrafterRegistry.get(entity).getRecipe(itemStack.getItem().getRegistryName().toString());
-        queueActions();
     }
 
     @Override
     public void queueActions()
     {
-        taskActions.addAction(new TravelAction(chest));
-        taskActions.addAction(new GetItemsAction(chest, recipe.getIngredients(handler.inventory)));
-        taskActions.addAction(new TravelAction(craftingBench));
-        taskActions.addAction(new CraftingAction(stackToCraft));
-        taskActions.addAction(new TravelAction(chest));
-        taskActions.addAction(new PutItemsAction(chest, recipe.getResult()));
+        taskActions.add(new TravelAction(chest));
+        taskActions.add(new GetItemsAction(chest, recipe.getIngredients(handler.inventory)));
+        taskActions.add(new TravelAction(craftingBench));
+        taskActions.add(new CraftingAction(stackToCraft));
+        taskActions.add(new TravelAction(chest));
+        taskActions.add(new PutItemsAction(chest, recipe.getResult()));
     }
 
     @Override
     public boolean shouldExecute()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canBeFullfilled()
     {
         return true;
     }

@@ -9,10 +9,9 @@ public class FollowTask extends AITask
 {
 
     public EntityPlayer entityToFollow;
-    
-    public FollowTask(EntityLivingAI entity, EntityPlayer entityLiving)
+
+    public FollowTask(EntityPlayer entityLiving)
     {
-        super(entity);
         entityToFollow = entityLiving;
     }
 
@@ -25,7 +24,13 @@ public class FollowTask extends AITask
     @Override
     public void queueActions()
     {
-        taskActions.addAction(new FollowAction().setPlayer(entityToFollow));
+        taskActions.add(new FollowAction().setPlayer(entityToFollow));
+    }
+
+    @Override
+    public boolean canBeFullfilled()
+    {
+        return true;
     }
 
 }

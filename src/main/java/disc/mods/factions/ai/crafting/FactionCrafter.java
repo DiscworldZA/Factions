@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import disc.mods.core.utils.FileIOHelper;
+import disc.mods.core.util.FileIOHelper;
 import disc.mods.factions.ai.crafting.recipes.JsonRecipe;
 import disc.mods.factions.ai.crafting.recipes.JsonRecipeFactory;
 import disc.mods.factions.entity.EntityLivingAI;

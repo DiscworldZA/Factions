@@ -1,6 +1,6 @@
 package disc.mods.factions.capabilities;
 
-import disc.mods.core.utils.ResourceLocationHelper;
+import disc.mods.core.util.ResourceLocationHelper;
 import disc.mods.factions.ref.References;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

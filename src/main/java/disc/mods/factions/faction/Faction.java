@@ -3,12 +3,13 @@ package disc.mods.factions.faction;
 import java.util.ArrayList;
 import java.util.List;
 
+import disc.mods.factions.ai.queue.IQueueHandler;
 import disc.mods.factions.ai.request.FactionRequestHandler;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.faction.buildings.FactionBuilding;
 import disc.mods.factions.tileentity.TileEntityFaction;
 
-public class Faction
+public class Faction implements IQueueHandler
 {
     public List<FactionBuilding> buildings = new ArrayList<FactionBuilding>();
     public FactionRequestHandler RequestHandler;
@@ -35,5 +36,11 @@ public class Faction
             entities.add(b.getAIType());
         }
         return entities;
+    }
+
+    @Override
+    public IQueueHandler getHandler()
+    {
+        return this;
     }
 }

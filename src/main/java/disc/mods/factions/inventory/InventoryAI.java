@@ -1,4 +1,4 @@
-package disc.mods.factions.ai;
+package disc.mods.factions.inventory;
 
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.Names;

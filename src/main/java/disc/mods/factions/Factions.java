@@ -1,5 +1,7 @@
 package disc.mods.factions;
 
+import org.apache.logging.log4j.Logger;
+
 import disc.mods.factions.config.ConfigLoader;
 import disc.mods.factions.config.FactionsConfig;
 import disc.mods.factions.init.FactionsBlocks;
@@ -27,6 +29,8 @@ public class Factions
 {
     @Instance
     public static Factions instance;
+    
+    public static Logger logger;
 
     public static Factions getInstance()
     {
@@ -50,6 +54,8 @@ public class Factions
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        
+        logger = event.getModLog();
         // Proxy preInit
         proxy.preInit(event);
 

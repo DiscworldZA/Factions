@@ -1,17 +1,16 @@
 package disc.mods.factions.ai.action;
 
+import disc.mods.factions.ai.queue.IQueueHandler;
+import disc.mods.factions.ai.queue.IQueueable;
 import disc.mods.factions.entity.EntityLivingAI;
 
-public abstract class AIAction
+public abstract class AIAction implements IQueueable<EntityLivingAI>
 {
     protected EntityLivingAI handler;
 
     public abstract boolean shouldExecute();
 
-    public void startExecuting()
-    {
-
-    }
+    public abstract void startExecuting();
 
     public abstract boolean updateAction();
 
@@ -24,10 +23,10 @@ public abstract class AIAction
     {
 
     }
-    
-    public AIAction setHandler(EntityLivingAI entityLivingAI)
+
+    @Override
+    public void setHandler(EntityLivingAI handler)
     {
-        handler = entityLivingAI;
-        return this;
+        this.handler = handler;
     }
 }

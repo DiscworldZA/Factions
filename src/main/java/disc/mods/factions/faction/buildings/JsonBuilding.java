@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import disc.mods.core.utils.FileIOHelper;
+import disc.mods.core.util.FileIOHelper;
 import disc.mods.factions.ref.References;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;

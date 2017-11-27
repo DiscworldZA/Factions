@@ -1,6 +1,6 @@
 package disc.mods.factions.event;
 
-import disc.mods.core.utils.PlayerUtils;
+import disc.mods.core.util.PlayerUtils;
 import disc.mods.factions.block.BlockBuildable;
 import disc.mods.factions.block.BlockFaction;
 import disc.mods.factions.capabilities.IFactionCapability;

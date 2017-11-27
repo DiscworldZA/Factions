@@ -2,7 +2,7 @@ package disc.mods.factions.init;
 
 import java.util.Random;
 
-import disc.mods.core.utils.ResourceLocationHelper;
+import disc.mods.core.util.ResourceLocationHelper;
 import disc.mods.factions.Factions;
 import disc.mods.factions.entity.EntityBlacksmith;
 import disc.mods.factions.entity.EntityDeliveryMan;

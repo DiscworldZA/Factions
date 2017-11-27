@@ -1,6 +1,6 @@
 package disc.mods.factions.utils;
 
-import disc.mods.factions.ai.InventoryAI;
+import disc.mods.factions.inventory.InventoryAI;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

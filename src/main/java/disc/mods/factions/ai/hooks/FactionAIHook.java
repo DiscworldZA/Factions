@@ -1,16 +1,16 @@
-package disc.mods.factions.ai;
+package disc.mods.factions.ai.hooks;
 
+import disc.mods.factions.Factions;
 import disc.mods.factions.ai.action.AIAction;
 import disc.mods.factions.ai.task.AITask;
 import disc.mods.factions.entity.EntityLivingAI;
 import net.minecraft.entity.ai.EntityAIBase;
 
-public class FactionAI extends EntityAIBase
+public class FactionAIHook extends EntityAIBase
 {
     private EntityLivingAI handler;
-    private AITask currentTask;
 
-    public FactionAI(EntityLivingAI entity)
+    public FactionAIHook(EntityLivingAI entity)
     {
         handler = entity;
     }
@@ -20,7 +20,7 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            return handler.factionTasks.hasTasks() && handler.factionTasks.getFirstTask().shouldExecute();
+            return handler.factionTasks.hasNext();
         }
         return false;
     }
@@ -30,8 +30,8 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            currentTask = handler.factionTasks.getFirstTask();
-            currentTask.startExecuting();
+            Factions.logger.info("startExecuting Hook");
+            handler.factionTasks.pop().startExecuting();
         }
     }
 
@@ -40,9 +40,12 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            if(!currentTask.updateTask())
+            Factions.logger.info("updateTask Hook");
+            if(!handler.factionTasks.current.updateTask())
             {
-                //Handle Parrallel Tasking
+                handler.factionTasks.current.paused = true;
+                handler.factionTasks.pushBack();
+                handler.factionTasks.pop();
             }
         }
     }
@@ -52,7 +55,8 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            return currentTask.continueExecuting();
+            Factions.logger.info("continueExecuting Hook");
+            return handler.factionTasks.current.continueExecuting();
         }
         return false;
     }
@@ -62,7 +66,8 @@ public class FactionAI extends EntityAIBase
     {
         if (handler.isServerWorld())
         {
-            handler.factionTasks.removeTask(currentTask);
+            Factions.logger.info("rsetTask Hook");
+            handler.factionTasks.current.resetTask();
         }
     }
 

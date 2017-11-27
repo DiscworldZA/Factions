@@ -1,6 +1,6 @@
 package disc.mods.factions.client.renderer.entity;
 
-import disc.mods.core.utils.ResourceLocationHelper;
+import disc.mods.core.util.ResourceLocationHelper;
 import disc.mods.factions.entity.EntityBlacksmith;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.ref.References;

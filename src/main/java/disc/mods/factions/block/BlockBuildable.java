@@ -1,7 +1,7 @@
 package disc.mods.factions.block;
 
 import disc.mods.core.block.CoreTileEntityBlock;
-import disc.mods.core.utils.PlayerUtils;
+import disc.mods.core.util.PlayerUtils;
 import disc.mods.factions.Factions;
 import disc.mods.factions.capabilities.IFactionCapability;
 import disc.mods.factions.creativetab.Tabs;

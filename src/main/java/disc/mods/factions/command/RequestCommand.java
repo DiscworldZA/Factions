@@ -30,7 +30,7 @@ public class RequestCommand extends FactionsCommand
             IFactionCapability cap = CapabilityHelper.getFactionCapability((EntityPlayer) sender);
             if(cap.hasFaction())
             {
-                cap.getFaction().RequestHandler.requestItem(args[0]);
+                //cap.getFaction().RequestHandler.requestItem(args[0]);
             }
         }
     }
