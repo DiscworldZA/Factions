@@ -56,4 +56,10 @@ public class FollowAction extends AIAction
         handler.getNavigator().clearPathEntity();
     }
 
+    @Override
+    public void startExecuting()
+    {
+        
+    }
+
 }

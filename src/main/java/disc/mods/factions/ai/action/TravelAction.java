@@ -46,4 +46,10 @@ public class TravelAction extends AIAction
         return isTraveling();
     }
 
+    @Override
+    public void startExecuting()
+    {
+        
+    }
+
 }
