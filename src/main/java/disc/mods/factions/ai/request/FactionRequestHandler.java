@@ -1,9 +1,9 @@
 package disc.mods.factions.ai.request;
 
-import disc.mods.factions.ai.queue.SimpleObjectQueue;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.faction.Faction;
 import disc.mods.factions.registry.Registries;
+import disc.mods.factions.utils.queue.SimpleObjectQueue;
 
 public class FactionRequestHandler extends SimpleObjectQueue<Request, Faction>
 {

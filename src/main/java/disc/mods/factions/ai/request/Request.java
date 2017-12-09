@@ -1,9 +1,9 @@
 package disc.mods.factions.ai.request;
 
 import disc.mods.factions.Factions;
-import disc.mods.factions.ai.queue.IQueueHandler;
-import disc.mods.factions.ai.queue.IQueueable;
 import disc.mods.factions.faction.Faction;
+import disc.mods.factions.utils.queue.IQueueHandler;
+import disc.mods.factions.utils.queue.IQueueable;
 
 public class Request implements IQueueable
 {

@@ -3,11 +3,11 @@ package disc.mods.factions.faction;
 import java.util.ArrayList;
 import java.util.List;
 
-import disc.mods.factions.ai.queue.IQueueHandler;
 import disc.mods.factions.ai.request.FactionRequestHandler;
 import disc.mods.factions.entity.EntityLivingAI;
 import disc.mods.factions.faction.buildings.FactionBuilding;
 import disc.mods.factions.tileentity.TileEntityFaction;
+import disc.mods.factions.utils.queue.IQueueHandler;
 
 public class Faction implements IQueueHandler
 {

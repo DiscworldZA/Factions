@@ -27,10 +27,6 @@ public abstract class TileEntityBuilding extends FactionsTileEntity
         {
             building.update();
         }
-        else if (!factionName.isEmpty())
-        {
-            building.faction = FactionHandler.getFaction(factionName);
-        }
     }
 
     @Override

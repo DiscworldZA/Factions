@@ -1,12 +1,12 @@
 package disc.mods.factions.entity;
 
 import disc.mods.factions.ai.hooks.FactionAIHook;
-import disc.mods.factions.ai.queue.IQueueHandler;
 import disc.mods.factions.ai.task.FactionAITasks;
 import disc.mods.factions.faction.buildings.FactionBuilding;
 import disc.mods.factions.inventory.InventoryAI;
 import disc.mods.factions.ref.Names;
 import disc.mods.factions.tileentity.TileEntityBuilding;
+import disc.mods.factions.utils.queue.IQueueHandler;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;

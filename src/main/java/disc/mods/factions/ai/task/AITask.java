@@ -2,9 +2,9 @@ package disc.mods.factions.ai.task;
 
 import disc.mods.factions.Factions;
 import disc.mods.factions.ai.action.FactionTaskActions;
-import disc.mods.factions.ai.queue.IQueueHandler;
-import disc.mods.factions.ai.queue.IQueueable;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.utils.queue.IQueueHandler;
+import disc.mods.factions.utils.queue.IQueueable;
 
 public abstract class AITask implements IQueueable<EntityLivingAI>
 {

@@ -1,4 +1,4 @@
-package disc.mods.factions.ai.queue;
+package disc.mods.factions.utils.queue;
 
 public interface IQueueHandler
 {

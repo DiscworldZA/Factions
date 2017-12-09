@@ -1,8 +1,8 @@
 package disc.mods.factions.ai.task;
 
-import disc.mods.factions.ai.queue.IQueueHandler;
-import disc.mods.factions.ai.queue.SimpleObjectQueue;
 import disc.mods.factions.entity.EntityLivingAI;
+import disc.mods.factions.utils.queue.IQueueHandler;
+import disc.mods.factions.utils.queue.SimpleObjectQueue;
 
 public class FactionAITasks extends SimpleObjectQueue<AITask, EntityLivingAI>
 {
